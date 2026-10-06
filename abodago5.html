@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Digital | Naranja Creativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange-dark: #8b3a1f;
+            --orange: #e05e2b;
+            --orange-light: #ff8c5a;
+            --gray-dark: #2a2a2a;
+            --gray: #4a4a4a;
+            --white: #ffffff;
+            --white-soft: #fdf7f4;
+            --gray-text: #8a8a8a;
+            --shadow: 0 20px 40px rgba(42, 42, 42, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #2a2a2a 0%, #e05e2b 50%, #ff8c5a 100%);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px;
+        }
+        .card-container {
+            background: var(--white); border-radius: 24px;
+            box-shadow: var(--shadow); overflow: hidden;
+            position: relative; width: 100%; max-width: 920px;
+            transition: all 0.3s ease;
+        }
+        .card-container::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 6px; background: linear-gradient(90deg, var(--orange) 0%, var(--gray-dark) 100%); z-index: 10;
+        }
+        .desktop-layout { display: flex; height: 100%; }
+        .left-panel {
+            flex: 1; padding: 50px 40px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(160deg, var(--gray-dark) 0%, var(--gray) 100%);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .left-panel::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px; opacity: 0.5;
+        }
+        .left-panel > * { position: relative; z-index: 1; }
+        .right-panel {
+            flex: 1.4; padding: 50px 45px;
+            display: flex; flex-direction: column; justify-content: center; background: var(--white);
+        }
+        .profile-pic-large {
+            width: 170px; height: 170px; border-radius: 50%;
+            border: 5px solid var(--orange); object-fit: cover; margin-bottom: 25px;
+            box-shadow: 0 0 0 8px rgba(224, 94, 43, 0.2), 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .lawyer-name {
+            color: var(--white); font-family: 'Playfair Display', serif;
+            font-size: 2.2rem; margin-bottom: 8px; line-height: 1.2;
+        }
+        .lawyer-title {
+            color: var(--orange-light); font-size: 0.95rem;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            margin-bottom: 15px; font-weight: 600;
+        }
+        .oab-number {
+            color: rgba(255,255,255,0.7); font-size: 0.85rem; font-style: italic;
+            padding: 6px 16px; border: 1px solid rgba(224, 94, 43, 0.4);
+            border-radius: 20px; display: inline-block;
+        }
+        .section-title {
+            color: var(--gray-dark); font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; margin-bottom: 25px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--orange);
+            display: inline-block; position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 40px; height: 2px; background: var(--gray-dark);
+        }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+        .contact-item {
+            display: flex; align-items: center; background: var(--white-soft);
+            padding: 16px 18px; border-radius: 12px; border: 1px solid #f0e5df;
+            transition: all 0.3s ease; text-decoration: none; color: var(--gray-dark);
+            position: relative; overflow: hidden;
+        }
+        .contact-item::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+            background: linear-gradient(180deg, var(--orange), var(--gray-dark));
+            transform: scaleY(0); transition: transform 0.3s ease;
+        }
+        .contact-item:hover {
+            background: var(--white); border-color: var(--orange-light);
+            transform: translateY(-4px); box-shadow: 0 10px 25px rgba(224, 94, 43, 0.15);
+        }
+        .contact-item:hover::before { transform: scaleY(1); }
+        .contact-icon {
+            font-size: 1.4rem; color: var(--orange); margin-right: 14px;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            background: rgba(224, 94, 43, 0.08); border-radius: 8px; transition: 0.3s;
+        }
+        .contact-item:hover .contact-icon { background: var(--orange); color: var(--white); }
+        .contact-text h4 { font-size: 0.85rem; color: var(--gray-dark); margin-bottom: 4px; font-weight: 600; }
+        .contact-text p { font-size: 0.78rem; color: var(--gray-text); word-break: break-word; }
+        .specialty {
+            margin-top: 30px; text-align: center; padding: 14px;
+            background: linear-gradient(135deg, rgba(224, 94, 43, 0.06), rgba(42, 42, 42, 0.06));
+            border-radius: 12px; border: 1px dashed rgba(224, 94, 43, 0.4);
+        }
+        .specialty p { color: var(--orange); font-size: 0.85rem; font-weight: 500; }
+        .mobile-layout {
+            display: none; padding: 50px 25px; text-align: center;
+            flex-direction: column; align-items: center;
+            background: linear-gradient(180deg, var(--gray-dark) 0%, var(--gray) 100%);
+            position: relative; min-height: 80vh; justify-content: center;
+        }
+        .mobile-layout::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 25px 25px; opacity: 0.6;
+        }
+        .mobile-layout > * { position: relative; z-index: 1; }
+        .profile-pic-small {
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 4px solid var(--orange); object-fit: cover; margin-bottom: 20px;
+            box-shadow: 0 0 0 6px rgba(224, 94, 43, 0.2), 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .mobile-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; max-width: 320px; padding: 16px; margin: 8px 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(224, 94, 43, 0.5); border-radius: 50px;
+            color: var(--white); text-decoration: none; font-size: 1rem;
+            font-weight: 500; transition: all 0.3s ease; backdrop-filter: blur(5px);
+        }
+        .mobile-btn i { margin-right: 12px; font-size: 1.2rem; color: var(--orange-light); transition: 0.3s; }
+        .mobile-btn:hover, .mobile-btn.filled {
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            color: var(--white); border-color: var(--orange-light);
+            transform: scale(1.03); box-shadow: 0 10px 25px rgba(224, 94, 43, 0.4);
+        }
+        .mobile-btn:hover i, .mobile-btn.filled i { color: var(--white); }
+        .mobile-footer {
+            margin-top: 35px; color: rgba(255,255,255,0.5);
+            font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .desktop-layout { display: none; }
+            .mobile-layout { display: flex; }
+            .card-container { max-width: 400px; border-radius: 20px; }
+            .lawyer-name { font-size: 1.7rem; }
+        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .card-container { animation: fadeInUp 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .contact-item { animation: fadeIn 0.6s ease-out backwards; }
+        .contact-item:nth-child(1) { animation-delay: 0.1s; }
+        .contact-item:nth-child(2) { animation-delay: 0.2s; }
+        .contact-item:nth-child(3) { animation-delay: 0.3s; }
+        .contact-item:nth-child(4) { animation-delay: 0.4s; }
+        .mobile-btn { animation: fadeInUp 0.5s ease-out backwards; }
+        .mobile-btn:nth-child(1) { animation-delay: 0.2s; }
+        .mobile-btn:nth-child(2) { animation-delay: 0.3s; }
+        .mobile-btn:nth-child(3) { animation-delay: 0.4s; }
+        .mobile-btn:nth-child(4) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="desktop-layout">
+            <div class="left-panel">
+                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Abogado" class="profile-pic-large">
+                <h1 class="lawyer-name">Dr. Carlos Martínez</h1>
+                <p class="lawyer-title">Advocacia e Consultoria Jurídica</p>
+                <p class="oab-number">OAB/SC 0000</p>
+            </div>
+            <div class="right-panel">
+                <h3 class="section-title">Contacto Directo</h3>
+                <div class="contact-grid">
+                    <a href="#" class="contact-item">
+                        <i class="fab fa-whatsapp contact-icon"></i>
+                        <div class="contact-text"><h4>WhatsApp</h4><p>+55 47 99999-9999</p></div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div class="contact-text"><h4>Email</h4><p>contato@advogado.com</p></div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <i class="fab fa-instagram contact-icon"></i>
+                        <div class="contact-text"><h4>Instagram</h4><p>@dr.carlosmartinez</p></div>
+                    </a>
+                    <a href="#" class="contact-item">
+                        <i class="fas fa-globe contact-icon"></i>
+                        <div class="contact-text"><h4>Website</h4><p>www.martinezlegal.com</p></div>
+                    </a>
+                </div>
+                <div class="specialty">
+                    <p><i class="fas fa-balance-scale" style="color: var(--orange); margin-right: 6px;"></i> Especialista en Derecho Civil y Laboral</p>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-layout">
+            <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Abogado" class="profile-pic-small">
+            <h1 class="lawyer-name" style="font-size: 1.7rem;">Dr. Carlos Martínez</h1>
+            <p class="lawyer-title" style="font-size: 0.85rem; margin-bottom: 5px;">Advocacia e Consultoria</p>
+            <p class="oab-number" style="margin-bottom: 30px;">OAB/SC 0000</p>
+            <a href="#" class="mobile-btn filled"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#" class="mobile-btn"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" class="mobile-btn"><i class="fas fa-envelope"></i> Enviar Email</a>
+            <a href="#" class="mobile-btn"><i class="fas fa-globe"></i> Visitar Sitio Web</a>
+            <p class="mobile-footer"><i class="fas fa-hand-pointer"></i> Toca los íconos para contactar</p>
+        </div>
+    </div>
+</body>
+</html>

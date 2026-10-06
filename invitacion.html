@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nuestra Boda | Carlos & Ana</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. VARIABLES DE COLOR
+   ------------------------------------------------------------
+   ✅ MEJORA: paleta más cálida, menos blanca, más elegante.
+   Los fondos ahora son crema/beige suave en lugar de blanco puro.
+   ============================================================ */
+:root{
+    /* Fondos */
+    --bg-page:#f4ede0;          /* Fondo general: beige cálido */
+    --bg-section:#ede4d3;       /* Secciones alternas: beige más oscuro */
+    --bg-card:#ffffff;          /* Tarjetas: blanco (para contraste) */
+    --bg-card-warm:#fdfaf4;     /* Tarjetas cálidas */
+    --border-soft:#e0d5c0;      /* Bordes suaves */
+    --border-strong:#d4c4a8;    /* Bordes más definidos */
+
+    /* Acentos */
+    --gold:#b8935a;             /* Dorado más cálido (menos amarillo) */
+    --gold-light:#d4b483;       /* Dorado claro */
+    --gold-dark:#8a6d3f;        /* Dorado oscuro */
+    --sage:#8a9d7a;             /* Verde salvia */
+    --sage-dark:#6b7d5c;        /* Verde salvia oscuro */
+
+    /* Textos */
+    --ink:#3a332a;              /* Texto principal: café oscuro */
+    --ink-soft:#6b6055;         /* Texto secundario */
+    --ink-light:#8a7f72;        /* Texto terciario */
+
+    /* Sombras */
+    --shadow:0 20px 50px rgba(90,70,50,.15);
+    --shadow-soft:0 8px 25px rgba(90,70,50,.10);
+    --shadow-card:0 4px 20px rgba(90,70,50,.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    color:var(--ink);
+    background:var(--bg-page);
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+/* ============================================================
+   2. TIPOGRAFÍA
+   ============================================================ */
+h1,h2,h3{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    color:var(--ink);
+}
+
+/* ============================================================
+   3. SEPARADOR DECORATIVO
+   ============================================================ */
+.divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:20px auto;
+    width:180px;
+}
+.divider::before,.divider::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.divider .hoja{
+    color:var(--sage);
+    font-size:1.2rem;
+}
+
+/* ============================================================
+   4. HERO / PORTADA
+   ============================================================ */
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+        linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.6)),
+        url('imagenes/primera.png') center/cover;
+    color:#ffffff;
+    padding:40px 20px;
+}
+.hero-content{
+    max-width:700px;
+    animation:fadeUp 1.2s ease-out;
+}
+.hero-subtitle{
+    font-size:.9rem;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:20px;
+    font-weight:400;
+    text-shadow:0 2px 10px rgba(0,0,0,.85);
+}
+.hero-names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(3rem,10vw,6rem);
+    font-weight:700;
+    line-height:1.1;
+    margin:10px 0;
+    color:#ffffff;
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 4px 20px rgba(0,0,0,.75),
+        0 0 40px rgba(0,0,0,.5);
+}
+.hero-names .amp{
+    display:block;
+    font-size:.6em;
+    font-style:italic;
+    color:var(--gold-light);
+    margin:5px 0;
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 4px 20px rgba(0,0,0,.75);
+}
+.hero-date{
+    margin-top:30px;
+    font-size:clamp(1.1rem,3vw,1.5rem);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#ffffff;
+    font-weight:400;
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 4px 20px rgba(0,0,0,.75);
+}
+.hero-date strong{
+    color:var(--gold-light);
+    font-weight:700;
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 4px 20px rgba(0,0,0,.8);
+}
+.hero-scroll{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#ffffff;
+    font-size:1.5rem;
+    animation:bounce 2s infinite;
+    opacity:.85;
+    text-shadow:0 2px 8px rgba(0,0,0,.7);
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes bounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(-10px)}
+}
+
+/* ============================================================
+   5. CONTADOR REGRESIVO
+   ✅ MEJORA: fondo cálido + tarjetas con borde visible
+   ============================================================ */
+.contador{
+    background:var(--bg-card-warm);
+    padding:70px 20px;
+    text-align:center;
+    border-bottom:1px solid var(--border-soft);
+}
+.contador h2{font-size:1.8rem;margin-bottom:10px;}
+.contador .sub{
+    color:var(--ink-light);
+    font-size:.85rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:40px;
+}
+.contador-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    max-width:600px;
+    margin:0 auto;
+}
+.contador-item{
+    background:var(--bg-card);
+    border:1px solid var(--border-strong);
+    border-radius:12px;
+    padding:22px 10px;
+    transition:all .3s ease;
+    box-shadow:var(--shadow-card);
+    position:relative;
+}
+.contador-item::before{
+    content:'';
+    position:absolute;
+    top:0;left:20%;right:20%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    border-radius:0 0 4px 4px;
+}
+.contador-item:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-soft);
+    border-color:var(--gold);
+}
+.contador-num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.8rem,5vw,2.5rem);
+    font-weight:700;
+    color:var(--gold-dark);
+    line-height:1;
+}
+.contador-label{
+    font-size:.7rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ink-light);
+    margin-top:8px;
+}
+
+/* ============================================================
+   6. SECCIONES GENERALES
+   ✅ MEJORA: fondo cálido + secciones alternas bien diferenciadas
+   ============================================================ */
+.section{
+    padding:80px 20px;
+    max-width:1100px;
+    margin:0 auto;
+}
+.section-title{
+    text-align:center;
+    font-size:clamp(2rem,5vw,2.8rem);
+    margin-bottom:10px;
+    color:var(--ink);
+}
+.section-subtitle{
+    text-align:center;
+    color:var(--ink-light);
+    font-size:.85rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+/* ============================================================
+   7. HISTORIA
+   ✅ MEJORA: fondo beige cálido + tarjeta de imagen con marco
+   ============================================================ */
+.historia{
+    background:var(--bg-section);
+    max-width:none;
+    padding:80px 20px;
+}
+.historia-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+    max-width:1000px;
+    margin:0 auto;
+}
+.historia-texto p{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin-bottom:15px;
+    line-height:1.8;
+}
+.historia-texto .frase{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--gold-dark);
+    margin:25px 0;
+    padding-left:20px;
+    border-left:3px solid var(--sage);
+}
+.historia-img{
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:4/5;
+    border:8px solid var(--bg-card);
+    position:relative;
+}
+.historia-img::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border:1px solid var(--gold);
+    border-radius:10px;
+    pointer-events:none;
+    margin:6px;
+}
+.historia-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .6s ease;
+}
+.historia-img:hover img{transform:scale(1.05)}
+
+/* ============================================================
+   8. CEREMONIA Y RECEPCIÓN
+   ✅ MEJORA GRANDE: las tarjetas ahora se ven claramente
+   como "cuadros" con borde, sombra y fondo diferenciado.
+   ============================================================ */
+.eventos{
+    background:var(--bg-page);
+}
+.eventos-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    max-width:900px;
+    margin:40px auto 0;
+}
+.evento-card{
+    background:var(--bg-card);
+    border-radius:20px;
+    padding:45px 30px 35px;
+    text-align:center;
+    border:1px solid var(--border-strong);
+    transition:all .3s ease;
+    box-shadow:var(--shadow-card);
+    position:relative;
+    overflow:hidden;
+}
+/* ✅ Detalle decorativo superior en cada tarjeta */
+.evento-card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+}
+/* ✅ Esquinas decorativas */
+.evento-card::after{
+    content:'';
+    position:absolute;
+    top:14px;left:14px;
+    width:20px;height:20px;
+    border-top:2px solid var(--gold);
+    border-left:2px solid var(--gold);
+    border-radius:4px 0 0 0;
+    opacity:.6;
+}
+.evento-card .esquina{
+    position:absolute;
+    bottom:14px;right:14px;
+    width:20px;height:20px;
+    border-bottom:2px solid var(--gold);
+    border-right:2px solid var(--gold);
+    border-radius:0 0 4px 0;
+    opacity:.6;
+}
+.evento-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+    border-color:var(--gold);
+}
+.evento-icon{
+    font-size:2.5rem;
+    margin-bottom:15px;
+    display:inline-block;
+}
+.evento-card h3{
+    font-size:1.9rem;
+    color:var(--gold-dark);
+    margin-bottom:8px;
+    letter-spacing:.5px;
+}
+/* ✅ Hora en badge/destacado */
+.evento-card .hora{
+    display:inline-block;
+    font-size:1rem;
+    font-weight:600;
+    color:var(--bg-card);
+    background:var(--sage-dark);
+    margin-bottom:20px;
+    letter-spacing:1.5px;
+    padding:6px 18px;
+    border-radius:50px;
+    text-transform:uppercase;
+}
+.evento-card .lugar{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.4rem;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:10px;
+}
+.evento-card .direccion{
+    font-size:.88rem;
+    color:var(--ink-soft);
+    margin-bottom:25px;
+    line-height:1.6;
+    padding:0 10px;
+}
+.btn-mapa{
+    display:inline-block;
+    padding:12px 28px;
+    background:var(--gold);
+    color:#ffffff;
+    text-decoration:none;
+    border-radius:50px;
+    font-size:.85rem;
+    font-weight:500;
+    letter-spacing:1px;
+    transition:all .3s ease;
+    box-shadow:0 4px 12px rgba(184,147,90,.3);
+}
+.btn-mapa:hover{
+    background:var(--gold-dark);
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(184,147,90,.4);
+}
+
+/* ============================================================
+   9. PADRINOS
+   ✅ MEJORA: tarjetas con borde dorado más visible y fondo cálido
+   ============================================================ */
+.padrinos{
+    background:var(--bg-section);
+    max-width:none;
+    padding:80px 20px;
+}
+.padrinos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
+    margin-top:40px;
+    max-width:1100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.padrino-card{
+    background:var(--bg-card);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow-card);
+    transition:all .3s ease;
+    text-align:center;
+    border:1px solid var(--border-strong);
+    position:relative;
+}
+.padrino-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border:1px solid var(--gold);
+    border-radius:16px;
+    margin:6px;
+    pointer-events:none;
+    opacity:.4;
+}
+.padrino-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+    border-color:var(--gold);
+}
+.padrino-card:hover::after{opacity:.8;}
+.padrino-foto{
+    width:100%;
+    aspect-ratio:1/1;
+    overflow:hidden;
+    background:var(--bg-section);
+    position:relative;
+}
+.padrino-foto img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .6s ease;
+}
+.padrino-card:hover .padrino-foto img{transform:scale(1.08)}
+.padrino-info{
+    padding:22px 15px 26px;
+    background:var(--bg-card-warm);
+    position:relative;
+}
+.padrino-info::before{
+    content:'';
+    position:absolute;
+    top:0;left:30%;right:30%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.padrino-rol{
+    font-size:.7rem;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--sage-dark);
+    margin-bottom:8px;
+    font-weight:600;
+}
+.padrino-nombres{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.35rem;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.3;
+}
+.padrino-nombres .amp{color:var(--gold);font-style:italic;}
+
+/* ============================================================
+   10. GALERÍA CON CARRUSEL
+   ============================================================ */
+.galeria{background:var(--bg-page);}
+.carrusel{
+    position:relative;
+    max-width:900px;
+    margin:40px auto 0;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/10;
+    background:#000;
+    border:8px solid var(--bg-card);
+}
+.carrusel-track{
+    display:flex;
+    height:100%;
+    transition:transform .8s cubic-bezier(.65,0,.35,1);
+}
+.carrusel-slide{
+    min-width:100%;
+    height:100%;
+    position:relative;
+}
+.carrusel-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.carrusel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,.9);
+    border:none;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1.2rem;
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all .3s ease;
+    z-index:10;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.carrusel-btn:hover{
+    background:var(--gold);
+    color:#ffffff;
+    transform:translateY(-50%) scale(1.1);
+}
+.carrusel-btn.prev{left:15px;}
+.carrusel-btn.next{right:15px;}
+.carrusel-dots{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    z-index:10;
+}
+.carrusel-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:rgba(255,255,255,.5);
+    cursor:pointer;
+    transition:all .3s ease;
+    border:none;
+}
+.carrusel-dot.active{
+    background:var(--gold);
+    width:28px;
+    border-radius:5px;
+}
+
+/* ============================================================
+   11. DRESS CODE
+   ✅ MEJORA: fondo beige + tarjeta con borde dorado visible
+   ============================================================ */
+.dresscode{
+    background:var(--bg-section);
+    text-align:center;
+    max-width:none;
+    padding:80px 20px;
+}
+.dresscode-box{
+    background:var(--bg-card);
+    max-width:600px;
+    margin:40px auto 0;
+    padding:50px 30px;
+    border-radius:20px;
+    box-shadow:var(--shadow-card);
+    border:1px solid var(--border-strong);
+    position:relative;
+}
+.dresscode-box::before{
+    content:'';
+    position:absolute;
+    top:-1px;left:20%;right:20%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    border-radius:3px;
+}
+.dresscode-icon{
+    font-size:2.5rem;
+    margin-bottom:15px;
+    display:inline-block;
+}
+.dresscode-box h3{
+    font-size:1.9rem;
+    color:var(--gold-dark);
+    margin-bottom:15px;
+    letter-spacing:.5px;
+}
+.dresscode-box p{
+    color:var(--ink-soft);
+    font-size:1rem;
+    line-height:1.8;
+}
+.dresscode-nota{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px dashed var(--gold);
+    font-size:.88rem;
+    color:var(--sage-dark);
+    font-style:italic;
+    line-height:1.7;
+}
+
+/* ============================================================
+   12. RSVP
+   ============================================================ */
+.rsvp{
+    background:var(--bg-page);
+    text-align:center;
+}
+.rsvp-box{
+    background:linear-gradient(135deg,var(--sage),var(--sage-dark));
+    color:#ffffff;
+    max-width:600px;
+    margin:40px auto 0;
+    padding:55px 30px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+}
+.rsvp-box::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+}
+.rsvp-box h3{
+    color:#ffffff;
+    font-size:2rem;
+    margin-bottom:10px;
+}
+.rsvp-box p{
+    font-size:1rem;
+    margin-bottom:25px;
+    opacity:.95;
+}
+.btn-rsvp{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 36px;
+    background:#ffffff;
+    color:var(--sage-dark);
+    text-decoration:none;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:600;
+    letter-spacing:1px;
+    transition:all .3s ease;
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+.btn-rsvp:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(0,0,0,.3);
+    background:var(--gold-light);
+    color:var(--ink);
+}
+.rsvp-fecha{
+    margin-top:20px;
+    font-size:.85rem;
+    opacity:.9;
+    letter-spacing:1px;
+}
+
+/* ============================================================
+   13. FOOTER
+   ============================================================ */
+.footer{
+    background:#2a251e;
+    color:#ffffff;
+    text-align:center;
+    padding:70px 20px 40px;
+    position:relative;
+}
+.footer::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:4px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+}
+.footer-frase{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.7rem;
+    color:var(--gold-light);
+    margin-bottom:25px;
+}
+.footer-hashtag{
+    font-size:1.05rem;
+    letter-spacing:3px;
+    color:#ffffff;
+    margin-bottom:20px;
+    opacity:.9;
+}
+.footer-names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.2rem;
+    color:#ffffff;
+    margin-bottom:30px;
+}
+.footer-names .amp{color:var(--gold-light);font-style:italic}
+.footer-line{
+    width:80px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 20px;
+    opacity:.6;
+}
+.footer-copy{
+    font-size:.75rem;
+    color:rgba(255,255,255,.55);
+    letter-spacing:1px;
+}
+
+/* ============================================================
+   14. BOTÓN DE MÚSICA
+   ============================================================ */
+.music-btn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#ffffff;
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.3rem;
+    box-shadow:0 8px 25px rgba(184,147,90,.5);
+    transition:all .3s ease;
+    z-index:999;
+    animation:pulse 2s infinite;
+}
+.music-btn:hover{
+    transform:scale(1.1);
+    background:var(--gold-dark);
+}
+.music-btn.playing{
+    animation:none;
+    background:var(--sage-dark);
+    box-shadow:0 8px 25px rgba(107,125,92,.5);
+}
+.music-btn.paused{
+    animation:pulse 2s infinite;
+    background:var(--gold);
+}
+.music-icon{
+    display:inline-block;
+    line-height:1;
+    font-style:normal;
+}
+
+@keyframes pulse{
+    0%,100%{box-shadow:0 8px 25px rgba(184,147,90,.5), 0 0 0 0 rgba(184,147,90,.5)}
+    50%{box-shadow:0 8px 25px rgba(184,147,90,.5), 0 0 0 15px rgba(184,147,90,0)}
+}
+
+/* ============================================================
+   15. ANIMACIONES AL SCROLL
+   ============================================================ */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ============================================================
+   16. RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+    .historia-content{grid-template-columns:1fr;gap:30px}
+    .eventos-grid{grid-template-columns:1fr}
+    .contador-grid{gap:10px}
+    .contador-item{padding:16px 5px}
+    .section{padding:60px 20px}
+    .hero-names{font-size:clamp(2.5rem,12vw,4rem)}
+    .carrusel{aspect-ratio:4/5;border-width:5px}
+    .evento-card{padding:35px 22px 28px}
+    .evento-card h3{font-size:1.6rem}
+    .rsvp-box{padding:45px 22px}
+    .dresscode-box{padding:40px 22px}
+}
+@media(max-width:480px){
+    .contador-num{font-size:1.6rem}
+    .contador-label{font-size:.6rem}
+    .padrinos-grid{grid-template-columns:1fr}
+    .music-btn{width:48px;height:48px;bottom:15px;right:15px;font-size:1.1rem}
+    .evento-card .lugar{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ BOTÓN DE MÚSICA ============ -->
+<button class="music-btn paused" id="musicBtn" aria-label="Reproducir música">
+    <span class="music-icon">♪</span>
+</button>
+
+<!-- ============ 1. PORTADA ============ -->
+<header class="hero">
+    <div class="hero-content">
+        <p class="hero-subtitle">Nuestra Boda</p>
+        <h1 class="hero-names">
+            Carlos
+            <span class="amp">&</span>
+            Ana
+        </h1>
+        <p class="hero-date">
+            <strong>Sábado 14</strong> de Febrero, 2026
+        </p>
+    </div>
+    <div class="hero-scroll">⌄</div>
+</header>
+
+<!-- ============ 2. CONTADOR ============ -->
+<section class="contador reveal">
+    <h2>Faltan</h2>
+    <p class="sub">Para nuestro gran día</p>
+    <div class="contador-grid" id="contador">
+        <div class="contador-item">
+            <div class="contador-num" id="dias">00</div>
+            <div class="contador-label">Días</div>
+        </div>
+        <div class="contador-item">
+            <div class="contador-num" id="horas">00</div>
+            <div class="contador-label">Horas</div>
+        </div>
+        <div class="contador-item">
+            <div class="contador-num" id="minutos">00</div>
+            <div class="contador-label">Minutos</div>
+        </div>
+        <div class="contador-item">
+            <div class="contador-num" id="segundos">00</div>
+            <div class="contador-label">Segundos</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ 3. HISTORIA ============ -->
+<section class="section historia">
+    <h2 class="section-title reveal">Nuestra Historia</h2>
+    <p class="section-subtitle reveal">Un amor que comenzó</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="historia-content">
+        <div class="historia-texto reveal">
+            <p>Hace algunos años, sin saberlo, nuestros caminos se cruzaron. Lo que empezó como una amistad, con el tiempo se convirtió en el amor más grande de nuestras vidas.</p>
+            <p class="frase">"Hoy decidimos unir nuestras vidas para siempre, y queremos que seas testigo de este momento tan especial."</p>
+            <p>Con la bendición de Dios y de nuestras familias, te invitamos a celebrar con nosotros el día en que diremos "sí, acepto".</p>
+        </div>
+        <div class="historia-img reveal">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Pareja de novios">
+        </div>
+    </div>
+</section>
+
+<!-- ============ 4. CEREMONIA Y RECEPCIÓN ============ -->
+<section class="section eventos">
+    <h2 class="section-title reveal">Ceremonia & Recepción</h2>
+    <p class="section-subtitle reveal">Dónde y cuándo</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="eventos-grid">
+        <!-- Ceremonia -->
+        <div class="evento-card reveal">
+            <span class="esquina"></span>
+            <div class="evento-icon">💍</div>
+            <h3>Ceremonia</h3>
+            <p class="hora">4:00 PM</p>
+            <p class="lugar">Iglesia San Miguel</p>
+            <p class="direccion">Av. Principal #123, Centro<br>La Paz, Bolivia</p>
+            <a href="https://maps.google.com/?q=La+Paz+Bolivia" target="_blank" rel="noopener" class="btn-mapa">
+                Ver en mapa
+            </a>
+        </div>
+
+        <!-- Recepción -->
+        <div class="evento-card reveal">
+            <span class="esquina"></span>
+            <div class="evento-icon">🥂</div>
+            <h3>Recepción</h3>
+            <p class="hora">7:00 PM</p>
+            <p class="lugar">Salón Jardín Real</p>
+            <p class="direccion">Calle Los Rosales #456<br>La Paz, Bolivia</p>
+            <a href="https://maps.google.com/?q=La+Paz+Bolivia" target="_blank" rel="noopener" class="btn-mapa">
+                Ver en mapa
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ 5. PADRINOS ============ -->
+<section class="section padrinos">
+    <h2 class="section-title reveal">Nuestros Padrinos</h2>
+    <p class="section-subtitle reveal">Personas especiales que nos acompañan</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="padrinos-grid">
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja1.png" alt="Padrinos de Anillos">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Anillos</p>
+                <p class="padrino-nombres">Roberto <span class="amp">&</span> María</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja2.png" alt="Padrinos de Torta">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Torta</p>
+                <p class="padrino-nombres">Jorge <span class="amp">&</span> Lucía</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja3.png" alt="Padrinos de Brindis">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Brindis</p>
+                <p class="padrino-nombres">Fernando <span class="amp">&</span> Carolina</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja4.png" alt="Padrinos de Ramo">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Ramo</p>
+                <p class="padrino-nombres">Andrés <span class="amp">&</span> Sofía</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja5.png" alt="Padrinos de Arras">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Arras</p>
+                <p class="padrino-nombres">Miguel <span class="amp">&</span> Valentina</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja6.png" alt="Padrinos de Lazo">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Lazo</p>
+                <p class="padrino-nombres">Ricardo <span class="amp">&</span> Daniela</p>
+            </div>
+        </div>
+
+        <div class="padrino-card reveal">
+            <div class="padrino-foto">
+                <img src="imagenes/pareja7.png" alt="Padrinos de Invitación">
+            </div>
+            <div class="padrino-info">
+                <p class="padrino-rol">Padrinos de Invitación</p>
+                <p class="padrino-nombres">Alejandro <span class="amp">&</span> Camila</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ 6. GALERÍA ============ -->
+<section class="section galeria">
+    <h2 class="section-title reveal">Nuestros Momentos</h2>
+    <p class="section-subtitle reveal">Recuerdos que atesoramos</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="carrusel reveal" id="carrusel">
+        <div class="carrusel-track" id="carruselTrack">
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Foto 1">
+            </div>
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80" alt="Foto 2">
+            </div>
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80" alt="Foto 3">
+            </div>
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80" alt="Foto 4">
+            </div>
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80" alt="Foto 5">
+            </div>
+            <div class="carrusel-slide">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80" alt="Foto 6">
+            </div>
+        </div>
+
+        <button class="carrusel-btn prev" id="prevBtn" aria-label="Anterior">❮</button>
+        <button class="carrusel-btn next" id="nextBtn" aria-label="Siguiente">❯</button>
+
+        <div class="carrusel-dots" id="carruselDots"></div>
+    </div>
+</section>
+
+<!-- ============ 7. DRESS CODE ============ -->
+<section class="section dresscode">
+    <h2 class="section-title reveal">Código de Vestimenta</h2>
+    <p class="section-subtitle reveal">Para lucir elegantes</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="dresscode-box reveal">
+        <div class="dresscode-icon">👔</div>
+        <h3>Formal</h3>
+        <p>Te pedimos vestir de manera elegante para acompañarnos en este día tan especial.</p>
+        <p class="dresscode-nota">Evitar el color blanco (reservado para la novia) y el verde salvia (reservado para las damas).</p>
+    </div>
+</section>
+
+<!-- ============ 8. RSVP ============ -->
+<section class="section rsvp">
+    <h2 class="section-title reveal">Confirma tu Asistencia</h2>
+    <p class="section-subtitle reveal">Nos encantaría contar contigo</p>
+    <div class="divider reveal"><span class="hoja">❦</span></div>
+
+    <div class="rsvp-box reveal">
+        <h3>¿Nos acompañás?</h3>
+        <p>Por favor confirma tu asistencia antes del <strong>1 de Febrero, 2026</strong></p>
+        <a href="https://wa.me/59170000000?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Carlos%20y%20Ana" target="_blank" rel="noopener" class="btn-rsvp">
+            💬 Confirmar por WhatsApp
+        </a>
+        <p class="rsvp-fecha">Cualquier consulta, no dudes en escribirnos</p>
+    </div>
+</section>
+
+<!-- ============ 9. FOOTER ============ -->
+<footer class="footer">
+    <p class="footer-frase">"Y así, los dos serán uno"</p>
+    <p class="footer-hashtag">#BodaCarlosYAna2026</p>
+    <p class="footer-names">Carlos <span class="amp">&</span> Ana</p>
+    <div class="footer-line"></div>
+    <p class="footer-copy">Hecho con ❤️ para nuestro gran día</p>
+</footer>
+
+<!-- ============ AUDIO ============ -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="audios/boda.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============ SCRIPTS ============ -->
+<script>
+/* ============================================================
+   1. CONTADOR REGRESIVO
+   ============================================================ */
+const fechaBoda = new Date("February 14, 2026 16:00:00").getTime();
+
+function actualizarContador(){
+    const ahora = new Date().getTime();
+    const diff = fechaBoda - ahora;
+
+    if(diff < 0){
+        ['dias','horas','minutos','segundos'].forEach(id => {
+            document.getElementById(id).textContent = '00';
+        });
+        return;
+    }
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('dias').textContent = String(dias).padStart(2,'0');
+    document.getElementById('horas').textContent = String(horas).padStart(2,'0');
+    document.getElementById('minutos').textContent = String(minutos).padStart(2,'0');
+    document.getElementById('segundos').textContent = String(segundos).padStart(2,'0');
+}
+
+actualizarContador();
+setInterval(actualizarContador, 1000);
+
+
+/* ============================================================
+   2. CARRUSEL
+   ============================================================ */
+const track = document.getElementById('carruselTrack');
+const slides = track.querySelectorAll('.carrusel-slide');
+const dotsContainer = document.getElementById('carruselDots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let currentSlide = 0;
+const totalSlides = slides.length;
+let autoPlayInterval;
+
+slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('carrusel-dot');
+    if(i === 0) dot.classList.add('active');
+    dot.setAttribute('aria-label', `Ir a la foto ${i + 1}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.carrusel-dot');
+
+function goToSlide(index){
+    currentSlide = index;
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+}
+
+function nextSlide(){
+    currentSlide = (currentSlide + 1) % totalSlides;
+    goToSlide(currentSlide);
+}
+
+function prevSlide(){
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(currentSlide);
+}
+
+nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+
+function startAutoPlay(){
+    autoPlayInterval = setInterval(nextSlide, 4000);
+}
+function resetAutoPlay(){
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+}
+startAutoPlay();
+
+document.getElementById('carrusel').addEventListener('mouseenter', () => {
+    clearInterval(autoPlayInterval);
+});
+document.getElementById('carrusel').addEventListener('mouseleave', startAutoPlay);
+
+
+/* ============================================================
+   3. ANIMACIONES AL SCROLL
+   ============================================================ */
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+});
+revealElements.forEach(el => revealObserver.observe(el));
+
+
+/* ============================================================
+   4. MÚSICA DE FONDO
+   ------------------------------------------------------------
+   ✅ Volumen al 40% (0.4). Cambia el número si quieres.
+   ✅ Intenta autoplay; si falla, arranca al primer clic.
+   ✅ Botón pausa/reproduce correctamente.
+   ============================================================ */
+const musicBtn = document.getElementById('musicBtn');
+const bgMusic = document.getElementById('bgMusic');
+const musicIcon = musicBtn.querySelector('.music-icon');
+
+bgMusic.volume = 0.03; // ✅ Cambia aquí el volumen (0.0 a 1.0)
+
+let isPlaying = false;
+
+function updateMusicUI(playing){
+    isPlaying = playing;
+    if(playing){
+        musicBtn.classList.add('playing');
+        musicBtn.classList.remove('paused');
+        musicIcon.textContent = '❚❚';
+        musicBtn.setAttribute('aria-label','Pausar música');
+    } else {
+        musicBtn.classList.remove('playing');
+        musicBtn.classList.add('paused');
+        musicIcon.textContent = '♪';
+        musicBtn.setAttribute('aria-label','Reproducir música');
+    }
+}
+
+function tryPlayMusic(){
+    bgMusic.play().then(() => {
+        updateMusicUI(true);
+    }).catch(error => {
+        updateMusicUI(false);
+        console.log('Autoplay bloqueado. Se reproducirá al primer clic.');
+    });
+}
+
+window.addEventListener('load', tryPlayMusic);
+
+document.addEventListener('click', function startOnFirstClick(e){
+    if(e.target.closest('#musicBtn')) return;
+    if(!isPlaying) tryPlayMusic();
+    document.removeEventListener('click', startOnFirstClick);
+});
+
+musicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if(isPlaying){
+        bgMusic.pause();
+        updateMusicUI(false);
+    } else {
+        bgMusic.play().then(() => {
+            updateMusicUI(true);
+        }).catch(error => {
+            console.log('No se pudo reproducir la música:', error);
+        });
+    }
+});
+
+bgMusic.addEventListener('play', () => updateMusicUI(true));
+bgMusic.addEventListener('pause', () => updateMusicUI(false));
+</script>
+
+</body>
+</html>
