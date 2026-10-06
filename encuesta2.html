@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta 2: Aceptación de la Plataforma Web / App Móvil</title>
+    <!-- Librería para generar el PDF desde el navegador -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #0d9488;
+            --secondary-color: #0f766e;
+            --accent-color: #14b8a6;
+            --bg-color: #f0fdfa;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--secondary-color);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            color: #64748b;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .question label.q-title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #ccfbf1;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            margin-top: 5px;
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media print {
+            .btn-container { display: none; }
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; padding: 20px; }
+            .option-label:hover { background: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="encuesta-content">
+    <div class="header">
+        <h1>Encuesta 2: Plataforma Web y Servicios Adicionales</h1>
+        <p>Aceptación de App Móvil, Notificaciones y Examen Simulacro Vocacional</p>
+    </div>
+
+    <form id="quizForm2">
+        
+        <!-- DATOS BÁSICOS -->
+        <div class="section-title">Información General</div>
+        
+        <div class="question">
+            <label class="q-title">Género del Padre / Madre / Tutor:</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="genero" value="Femenino"> Femenino</label>
+                <label class="option-label"><input type="radio" name="genero" value="Masculino"> Masculino</label>
+                <label class="option-label"><input type="radio" name="genero" value="Prefiero no decir"> Prefiero no decir</label>
+            </div>
+        </div>
+
+        <!-- SECCIÓN I: INTERÉS Y USO DE LA PLATAFORMA -->
+        <div class="section-title">I. Interés y Uso de la Plataforma Web / App Móvil</div>
+
+        <div class="question">
+            <label class="q-title">1. Si el colegio implementara una plataforma web o aplicación móvil para consultar las notas y asistencia de su hijo/a desde su celular, ¿qué tan útil le parecería?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p1" value="Muy útil"> Muy útil</label>
+                <label class="option-label"><input type="radio" name="p1" value="Útil"> Útil</label>
+                <label class="option-label"><input type="radio" name="p1" value="Poco útil"> Poco útil</label>
+                <label class="option-label"><input type="radio" name="p1" value="Nada útil"> Nada útil</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">2. ¿Qué funciones le gustaría que tenga la plataforma en su celular? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p2" value="Centralizador"> Centralizador de calificaciones por trimestre</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Asistencia"> Registro de asistencia, atrasos y licencias</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Tareas"> Tareas, trabajos prácticos y fechas de exámenes</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Conducta"> Observaciones de conducta o disciplina de los profesores</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Comunicados"> Comunicados oficiales, avisos y citaciones de la dirección</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Calendario"> Calendario de actividades y feriados escolares</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">3. ¿Le gustaría recibir una notificación o alerta automática en su celular cuando su hijo/a tenga una baja calificación, un atraso o una falta?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p3" value="Inmediatamente"> Sí, inmediatamente</label>
+                <label class="option-label"><input type="radio" name="p3" value="Semanal"> Sí, mediante un resumen semanal</label>
+                <label class="option-label"><input type="radio" name="p3" value="Tal vez"> Tal vez</label>
+                <label class="option-label"><input type="radio" name="p3" value="No"> No</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">4. ¿Qué tan útil le parecería ver gráficos que muestren si las notas de su hijo/a están subiendo o bajando a lo largo del año?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p4" value="Muy útil"> Muy útil</label>
+                <label class="option-label"><input type="radio" name="p4" value="Útil"> Útil</label>
+                <label class="option-label"><input type="radio" name="p4" value="Poco útil"> Poco útil</label>
+                <label class="option-label"><input type="radio" name="p4" value="Nada útil"> Nada útil</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">5. Si tiene más de un hijo/a en el colegio, ¿considera útil poder ver la información de todos desde una sola cuenta?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p5" value="Muy útil"> Muy útil</label>
+                <label class="option-label"><input type="radio" name="p5" value="Útil"> Útil</label>
+                <label class="option-label"><input type="radio" name="p5" value="Poco útil"> Poco útil</label>
+                <label class="option-label"><input type="radio" name="p5" value="No lo necesitaría"> No lo necesitaría / Solo tengo un hijo/a</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">6. ¿Desde qué dispositivo cree que ingresaría principalmente a la plataforma?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p6" value="Celular"> Celular inteligente (Smartphone)</label>
+                <label class="option-label"><input type="radio" name="p6" value="Computadora"> Computadora de escritorio / Laptop</label>
+                <label class="option-label"><input type="radio" name="p6" value="Tablet"> Tablet</label>
+                <label class="option-label"><input type="radio" name="p6" value="Ambos"> Celular y computadora por igual</label>
+            </div>
+        </div>
+
+        <!-- SECCIÓN II: SERVICIO ADICIONAL (SIMULACRO Y ORIENTACIÓN) -->
+        <div class="section-title">II. Servicio Adicional (Examen Simulacro y Orientación Vocacional)</div>
+
+        <div class="question">
+            <label class="q-title">7. Como plus, la plataforma realiza un examen simulacro presencial en el colegio y un seminario de orientación vocacional para evaluar y guiar a los estudiantes. ¿Qué tan valioso considera este servicio?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p7" value="Muy valioso"> Muy valioso</label>
+                <label class="option-label"><input type="radio" name="p7" value="Valioso"> Valioso</label>
+                <label class="option-label"><input type="radio" name="p7" value="Poco valioso"> Poco valioso</label>
+                <label class="option-label"><input type="radio" name="p7" value="Nada valioso"> Nada valioso</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">8. Después del examen simulacro y seminario, ¿qué reporte le gustaría recibir en su celular? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p8" value="Diagnóstico"> Diagnóstico de las materias o temas que necesita reforzar</label>
+                <label class="option-label"><input type="checkbox" name="p8" value="Aptitudes"> Reporte de aptitudes y áreas profesionales afines a sus intereses</label>
+                <label class="option-label"><input type="checkbox" name="p8" value="Material"> Recomendaciones y material de estudio complementario</label>
+                <label class="option-label"><input type="checkbox" name="p8" value="Carreras"> Información sobre carreras universitarias/técnicas relacionadas</label>
+            </div>
+        </div>
+
+        <!-- SECCIÓN III: DISPOSICIÓN DE PAGO Y TEMORES -->
+        <div class="section-title">III. Disposición de Pago y Aspectos Técnicos</div>
+
+        <div class="question">
+            <label class="q-title">9. Si el colegio ofreciera este servicio completo (Plataforma en celular + Examen Simulacro + Seminario Vocacional), ¿estaría dispuesto/a a pagar un monto anual por estudiante?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p9" value="Sí"> Sí</label>
+                <label class="option-label"><input type="radio" name="p9" value="Probablemente sí"> Probablemente sí</label>
+                <label class="option-label"><input type="radio" name="p9" value="Dependería del precio"> Dependería del precio</label>
+                <label class="option-label"><input type="radio" name="p9" value="No"> No</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">10. ¿Qué precio anual por estudiante consideraría razonable para contar con este servicio todo el año?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p10" value="Menos de Bs 20"> Menos de Bs 20</label>
+                <label class="option-label"><input type="radio" name="p10" value="Bs 20 - 35"> Entre Bs 20 y Bs 35</label>
+                <label class="option-label"><input type="radio" name="p10" value="Bs 36 - 50"> Entre Bs 36 y Bs 50</label>
+                <label class="option-label"><input type="radio" name="p10" value="Bs 51 - 80"> Entre Bs 51 y Bs 80</label>
+                <label class="option-label"><input type="radio" name="p10" value="Más de Bs 80"> Más de Bs 80</label>
+                <label class="option-label"><input type="radio" name="p10" value="No pagaría"> No estaría dispuesto/a a pagar</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">11. ¿Qué aspecto le preocuparía o generaría dudas al usar esta aplicación escolar? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p11" value="Megas"> Consumo de megas / datos móviles</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Señal"> Falta de señal o acceso continuo a internet</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Uso"> Dificultad para usar la aplicación en el celular</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Privacidad"> Privacidad y seguridad de las notas de mi hijo/a</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Actualización"> Que los profesores no mantengan al día las notas</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Ninguna"> Ninguna preocupación</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">12. Sugerencias o comentarios adicionales:</label>
+            <textarea name="p12" placeholder="Escriba aquí sus sugerencias para mejorar la comunicación..."></textarea>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-submit" onclick="descargarPDF()">Guardar y Descargar en PDF</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function descargarPDF() {
+        const element = document.getElementById('encuesta-content');
+        
+        const opt = {
+            margin:       [10, 10, 10, 10],
+            filename:     'Encuesta_Aceptacion_Plataforma.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
+</body>
+</html>
+
