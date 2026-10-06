@@ -1,336 +1,367 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tarjeta Digital | Importador</title>
-<style>
-:root{
-    --bg-1:#2b2870;
-    --bg-2:#14123a;
-    --ink:#f3f2ff;
-    --ink-soft:#b8b6d9;
-    --ac:#ffb547;
-    --ac-soft:rgba(255,181,71,.18);
-    --ac-glow:rgba(255,181,71,.5);
-    --on:#1b1a3a;
-    --box:rgba(10,9,40,.55);
-    --box-hover:rgba(255,181,71,.12);
-    --page:#0a0922;
-    --radius:28px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta a Padres de Familia - Seguimiento Académico</title>
+    <!-- Librería para generar el PDF desde el navegador -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #319795;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+        }
 
-body{
-    min-height:100vh;
-    font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;
-    background:
-        radial-gradient(circle at 20% 0%, rgba(255,181,71,.08), transparent 45%),
-        radial-gradient(circle at 80% 100%, rgba(255,181,71,.06), transparent 45%),
-        var(--page);
-    color:var(--ink);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:24px 16px;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
 
-/* --- TARJETA PRINCIPAL --- */
-.tarjeta{
-    width:100%;
-    max-width:400px;
-    border-radius:var(--radius);
-    overflow:hidden;
-    background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);
-    border:1px solid rgba(255,181,71,.4);
-    box-shadow:
-        0 24px 60px rgba(0,0,0,.5),
-        0 0 0 1px rgba(255,181,71,.08) inset,
-        0 0 80px rgba(255,181,71,.06);
-    padding:46px 28px 32px;
-    text-align:center;
-    position:relative;
-    animation:entrada .7s cubic-bezier(.22,1,.36,1);
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
 
-/* Brillo decorativo superior */
-.tarjeta::before{
-    content:'';
-    position:absolute;
-    top:-60%;left:50%;
-    transform:translateX(-50%);
-    width:120%;height:60%;
-    background:radial-gradient(ellipse at center, rgba(255,181,71,.18), transparent 70%);
-    pointer-events:none;
-}
+        .header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
 
-/* Textura sutil de puntos */
-.tarjeta::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size:18px 18px;
-    pointer-events:none;
-    opacity:.6;
-}
-.tarjeta > *{position:relative;z-index:1}
+        .header h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
 
-@keyframes entrada{
-    from{opacity:0;transform:translateY(24px) scale(.97)}
-    to{opacity:1;transform:translateY(0) scale(1)}
-}
+        .header p {
+            color: #718096;
+            margin: 0;
+            font-size: 14px;
+        }
 
-/* --- LOGO / AVATAR --- */
-.logo{
-    width:126px;height:126px;
-    margin:0 auto;
-    border-radius:50%;
-    border:2px solid var(--ac);
-    background:radial-gradient(circle at 30% 25%, #1e1b4d, #0f0d2e);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:
-        0 0 0 7px var(--ac-soft),
-        0 0 30px rgba(255,181,71,.3),
-        0 12px 30px rgba(0,0,0,.45);
-    transition:transform .4s ease, box-shadow .4s ease;
-}
-.logo:hover{
-    transform:scale(1.04);
-    box-shadow:
-        0 0 0 9px var(--ac-soft),
-        0 0 45px rgba(255,181,71,.45),
-        0 12px 30px rgba(0,0,0,.45);
-}
-.logo svg{
-    width:74px;height:74px;
-    fill:none;
-    stroke:var(--ac);
-    stroke-width:2.4;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    filter:drop-shadow(0 0 6px rgba(255,181,71,.45));
-}
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
 
-/* --- TEXTOS --- */
-h1{
-    font-size:1.6rem;
-    font-weight:600;
-    margin-top:28px;
-    letter-spacing:.3px;
-    color:var(--ink);
-}
-.rol{
-    margin-top:8px;
-    color:var(--ac);
-    font-size:1rem;
-    font-weight:600;
-    letter-spacing:.8px;
-    text-transform:uppercase;
-}
-.lema{
-    margin-top:8px;
-    font-size:.88rem;
-    color:var(--ink-soft);
-    line-height:1.5;
-    max-width:280px;
-    margin-left:auto;
-    margin-right:auto;
-}
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
 
-/* Separador decorativo con diamante */
-.linea{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    margin:24px auto 0;
-    width:80%;
-    opacity:.75;
-}
-.linea::before,.linea::after{
-    content:'';
-    flex:1;
-    height:1px;
-    background:linear-gradient(90deg,transparent,var(--ac),transparent);
-}
-.linea .diamante{
-    width:7px;height:7px;
-    background:var(--ac);
-    transform:rotate(45deg);
-    border-radius:1px;
-    box-shadow:0 0 8px var(--ac-glow);
-}
+        .question label.q-title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
 
-/* --- ICONOS --- */
-.iconos{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px 14px;
-    margin-top:28px;
-}
-.icono{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:9px;
-    text-decoration:none;
-    color:var(--ink);
-    font-size:.8rem;
-    font-weight:500;
-    letter-spacing:.3px;
-    transition:color .25s ease;
-}
-.icono:hover,.icono:focus-visible{
-    color:var(--ac);
-    outline:none;
-}
-.caja{
-    width:66px;height:66px;
-    border-radius:50%;
-    border:1.5px solid rgba(255,181,71,.55);
-    background:var(--box);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--ac);
-    transition:all .3s cubic-bezier(.22,1,.36,1);
-    position:relative;
-}
-.caja::after{
-    content:'';
-    position:absolute;
-    inset:-4px;
-    border-radius:50%;
-    border:1px solid transparent;
-    transition:border-color .3s ease;
-}
-.icono:hover .caja,
-.icono:focus-visible .caja{
-    background:var(--ac);
-    color:var(--on);
-    border-color:var(--ac);
-    transform:translateY(-4px) scale(1.06);
-    box-shadow:0 10px 22px rgba(255,181,71,.4), 0 0 22px rgba(255,181,71,.35);
-}
-.icono:hover .caja::after,
-.icono:focus-visible .caja::after{
-    border-color:var(--ac-soft);
-}
-svg.i{
-    width:28px;height:28px;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.7;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    transition:transform .3s ease;
-}
-.icono:hover svg.i{transform:scale(1.08)}
-svg.i .r{fill:currentColor;stroke:none}
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-/* --- RESPONSIVE --- */
-@media(min-width:900px){
-    .tarjeta{max-width:440px;padding:50px 34px 36px}
-}
-@media(max-width:360px){
-    .tarjeta{padding:38px 20px 26px;border-radius:22px}
-    .logo{width:110px;height:110px}
-    .logo svg{width:64px;height:64px}
-    h1{font-size:1.4rem}
-    .iconos{gap:14px 10px}
-    .caja{width:58px;height:58px}
-    svg.i{width:24px;height:24px}
-}
-</style>
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #edf2f7;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            margin-top: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Estilos específicos para impresión / PDF */
+        @media print {
+            .btn-container { display: none; }
+            body { padding: 0; background: white; }
+            .container { box-shadow: none; padding: 20px; }
+            .option-label:hover { background: transparent; }
+        }
+    </style>
 </head>
 <body>
-<main class="tarjeta">
 
-    <!-- Logo / Avatar -->
-    <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="26"/>
-            <path d="M14 40h52"/>
-            <path d="M40 14c14 14 14 38 0 52"/>
-            <path d="M40 14c-14 14-14 38 0 52"/>
-        </svg>
+<div class="container" id="encuesta-content">
+    <div class="header">
+        <h1>Encuesta a Padres de Familia</h1>
+        <p>Seguimiento Académico y Comunicación Colegio-Hogar</p>
     </div>
 
-    <!-- Nombre y datos -->
-    <h1>Nombre Apellido</h1>
-    <p class="rol">Importaciones y Comercio</p>
-    <p class="lema">Productos directos de fábrica a tu negocio</p>
+    <form id="quizForm">
+        <!-- DATOS DEMOGRÁFICOS BÁSICOS -->
+        <div class="section-title">Información General</div>
+        
+        <div class="question">
+            <label class="q-title">Género:</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="genero" value="Femenino"> Femenino</label>
+                <label class="option-label"><input type="radio" name="genero" value="Masculino"> Masculino</label>
+                <label class="option-label"><input type="radio" name="genero" value="Prefiero no decir"> Prefiero no decir</label>
+            </div>
+        </div>
 
-    <!-- Separador decorativo -->
-    <div class="linea" aria-hidden="true"><span class="diamante"></span></div>
+        <div class="question">
+            <label class="q-title">1. ¿Cuántos hijos tiene actualmente cursando en el colegio o escuela?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p1" value="1"> 1</label>
+                <label class="option-label"><input type="radio" name="p1" value="2"> 2</label>
+                <label class="option-label"><input type="radio" name="p1" value="3"> 3</label>
+                <label class="option-label"><input type="radio" name="p1" value="4 o más"> 4 o más</label>
+            </div>
+        </div>
 
-    <!-- Iconos de contacto -->
-    <nav class="iconos" aria-label="Contacto">
-        <a class="icono" href="https://wa.me/59170000000" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <path d="M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.6z"/>
-                    <path class="r" d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z"/>
-                </svg>
-            </span>
-            WhatsApp
-        </a>
+        <div class="question">
+            <label class="q-title">2. ¿En qué nivel escolar se encuentran sus hijos? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p2" value="Inicial"> Nivel Inicial (Kínder / Pre-kínder)</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Primaria"> Nivel Primario</label>
+                <label class="option-label"><input type="checkbox" name="p2" value="Secundaria"> Nivel Secundario</label>
+            </div>
+        </div>
 
-        <a class="icono" href="https://instagram.com/tuusuario" target="_blank" rel="noopener" aria-label="Instagram">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="5"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <circle class="r" cx="17.3" cy="6.7" r="1"/>
-                </svg>
-            </span>
-            Instagram
-        </a>
+        <div class="question">
+            <label class="q-title">3. ¿Cuál es su ocupación laboral o actividad principal?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p3" value="Horario Fijo"> Trabajo con horario fijo (oficina, fábrica, institución, etc.)</label>
+                <label class="option-label"><input type="radio" name="p3" value="Independiente"> Trabajo independiente / Comercio / Negocio propio</label>
+                <label class="option-label"><input type="radio" name="p3" value="Hogar"> Labores del hogar / Cuidado de la familia</label>
+                <label class="option-label"><input type="radio" name="p3" value="Eventual"> Trabajo eventual / Ocasional</label>
+                <label class="option-label"><input type="radio" name="p3" value="Otro"> Otro</label>
+            </div>
+        </div>
 
-        <a class="icono" href="https://www.tiktok.com/@tuusuario" target="_blank" rel="noopener" aria-label="TikTok">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <path d="M14 3v11.5a3.6 3.6 0 1 1-3.6-3.6"/>
-                    <path d="M14 3c.4 2.6 2 4.3 5 4.6"/>
-                </svg>
-            </span>
-            TikTok
-        </a>
+        <div class="question">
+            <label class="q-title">4. Por su disponibilidad de tiempo, ¿con qué frecuencia puede acudir presencialmente al colegio?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p4" value="Varias veces por semana"> Varias veces por semana</label>
+                <label class="option-label"><input type="radio" name="p4" value="Una vez por semana"> Una vez por semana</label>
+                <label class="option-label"><input type="radio" name="p4" value="Algunas veces al mes"> Algunas veces al mes</label>
+                <label class="option-label"><input type="radio" name="p4" value="Solo cuando me citan"> Solo cuando me citan los profesores o dirección</label>
+                <label class="option-label"><input type="radio" name="p4" value="Casi nunca"> Casi nunca por temas de horario / trabajo</label>
+            </div>
+        </div>
 
-        <a class="icono" href="catalogo.pdf" target="_blank" rel="noopener" aria-label="Catálogo">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="7" height="7" rx="1"/>
-                    <rect x="14" y="3" width="7" height="7" rx="1"/>
-                    <rect x="3" y="14" width="7" height="7" rx="1"/>
-                    <rect x="14" y="14" width="7" height="7" rx="1"/>
-                </svg>
-            </span>
-            Catálogo
-        </a>
+        <!-- PARTE 1: SITUACIÓN ACTUAL -->
+        <div class="section-title">Parte 1: Comunicación y Seguimiento de Calificaciones</div>
 
-        <a class="icono" href="mailto:correo@ejemplo.com" aria-label="Correo">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="14" rx="2"/>
-                    <path d="M3 7l9 6 9-6"/>
-                </svg>
-            </span>
-            Correo
-        </a>
+        <div class="question">
+            <label class="q-title">5. ¿Cómo se entera actualmente sobre las notas, tareas y el rendimiento de su hijo/a? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p5" value="Presencial"> Voy presencialmente a hablar con el tutor/profesor</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="Reuniones"> Reuniones de padres de familia / Entrega de libretas</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="WhatsApp"> Grupos de WhatsApp del curso</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="Agenda"> Agenda o cuaderno escolar</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="Avisos"> Notificaciones o avisos escritos del colegio</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="Hijo"> Me informa mi propio hijo/a</label>
+                <label class="option-label"><input type="checkbox" name="p5" value="Plataforma"> Plataforma / Sistema actual del colegio</label>
+            </div>
+        </div>
 
-        <a class="icono" href="https://www.tusitio.com" target="_blank" rel="noopener" aria-label="Sitio web">
-            <span class="caja">
-                <svg class="i" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="9"/>
-                    <path d="M3 12h18"/>
-                    <path d="M12 3c3 3 3 15 0 18"/>
-                    <path d="M12 3c-3 3-3 15 0 18"/>
-                </svg>
-            </span>
-            Sitio web
-        </a>
-    </nav>
+        <div class="question">
+            <label class="q-title">6. Cuando su hijo/a obtiene una baja calificación o no entrega una tarea, ¿cómo suele enterarse?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p6" value="Llamada docente"> El profesor/a me escribe o me llama directamente</label>
+                <label class="option-label"><input type="radio" name="p6" value="Agenda"> Veo la nota firmada en la agenda o cuaderno</label>
+                <label class="option-label"><input type="radio" name="p6" value="Hijo"> Mi hijo/a me cuenta en casa</label>
+                <label class="option-label"><input type="radio" name="p6" value="Conocidos"> Por medio de conocidos, amigos, apoderados o compañeros de curso</label>
+                <label class="option-label"><input type="radio" name="p6" value="Reunión trimestre"> Me entero en la reunión al finalizar el trimestre</label>
+                <label class="option-label"><input type="radio" name="p6" value="Citación"> Me entero cuando me citan por bajas calificaciones</label>
+                <label class="option-label"><input type="radio" name="p6" value="No a tiempo"> No suelo enterarme a tiempo</label>
+            </div>
+        </div>
 
-</main>
+        <div class="question">
+            <label class="q-title">7. ¿Alguna vez le ha pasado que se enteró muy tarde de que su hijo/a estaba perdiendo la materia o tenía varias casilleras vacías?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p7" value="Varias veces"> Sí, me ha pasado varias veces</label>
+                <label class="option-label"><input type="radio" name="p7" value="Alguna vez"> Sí, me pasó alguna vez</label>
+                <label class="option-label"><input type="radio" name="p7" value="No"> No, siempre me entero a tiempo</label>
+                <label class="option-label"><input type="radio" name="p7" value="No estoy seguro"> No estoy seguro/a</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">8. Si se hubiera enterado a tiempo de que su hijo/a tenía bajas notas, ¿usted habría intervenido para ayudarlo/a a estudiar y evitar que pierda la materia?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p8" value="Totalmente"> Sí, totalmente; habría buscado apoyo o reforzado sus estudios a tiempo</label>
+                <label class="option-label"><input type="radio" name="p8" value="Probablemente"> Probablemente sí; habría hablado con el profesor o con mi hijo/a</label>
+                <label class="option-label"><input type="radio" name="p8" value="Tal vez"> Tal vez; dependería de la materia o de mi tiempo</label>
+                <label class="option-label"><input type="radio" name="p8" value="No"> No; considero que es responsabilidad exclusiva del estudiante</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">9. ¿Cuál es el principal obstáculo que tiene para hacer un seguimiento continuo a las notas? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p9" value="Horarios"> Choque de horarios de trabajo con la atención de profesores</label>
+                <label class="option-label"><input type="checkbox" name="p9" value="Fin de trimestre"> La información solo la entregan al final del trimestre</label>
+                <label class="option-label"><input type="checkbox" name="p9" value="WhatsApp desorden"> Los grupos de WhatsApp se llenan de mensajes no relacionados</label>
+                <label class="option-label"><input type="checkbox" name="p9" value="Depende del hijo"> Dependo de lo que me dice mi hijo/a o de revisarle los cuadernos</label>
+                <label class="option-label"><input type="checkbox" name="p9" value="Falta comunicación"> Falta de comunicación directa con los docentes</label>
+                <label class="option-label"><input type="checkbox" name="p9" value="Ninguna"> No tengo ninguna dificultad</label>
+            </div>
+        </div>
+
+        <!-- PARTE 2: PROPUESTA DE PLATAFORMA -->
+        <div class="section-title">Parte 2: Plataforma Web / Aplicación Móvil</div>
+
+        <div class="question">
+            <label class="q-title">10. Si el colegio contara con una plataforma web o app para consultar la información escolar desde su celular, ¿qué tan útil le parecería?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p10" value="Muy útil"> Muy útil</label>
+                <label class="option-label"><input type="radio" name="p10" value="Útil"> Útil</label>
+                <label class="option-label"><input type="radio" name="p10" value="Poco útil"> Poco útil</label>
+                <label class="option-label"><input type="radio" name="p10" value="Nada útil"> Nada útil</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">11. ¿Qué información le gustaría consultar de forma inmediata en la plataforma? (Puede marcar varias)</label>
+            <div class="options">
+                <label class="option-label"><input type="checkbox" name="p11" value="Notas"> Calificaciones y centralizador por trimestre</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Asistencia"> Registro de asistencia y atrasos</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Tareas"> Tareas, trabajos prácticos y fechas de exámenes</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Conducta"> Observaciones de conducta o notas de disciplina</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Comunicados"> Comunicados oficiales y citaciones de la dirección</label>
+                <label class="option-label"><input type="checkbox" name="p11" value="Calendario"> Calendario de actividades y feriados escolares</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">12. Si se registra una nota baja o atraso, ¿le gustaría recibir una notificación o alerta en su celular?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p12" value="Inmediata"> Sí, de inmediato</label>
+                <label class="option-label"><input type="radio" name="p12" value="Semanal"> Sí, mediante un resumen semanal</label>
+                <label class="option-label"><input type="radio" name="p12" value="No"> No, prefiero enterarme solo en la libreta/reunión</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">13. Como valor agregado, la plataforma incluye un Examen Simulacro presencial y un Seminario de Orientación Vocacional en el colegio. ¿Qué tan valioso considera este servicio para su hijo/a?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p13" value="Muy valioso"> Muy valioso</label>
+                <label class="option-label"><input type="radio" name="p13" value="Valioso"> Valioso</label>
+                <label class="option-label"><input type="radio" name="p13" value="Poco valioso"> Poco valioso</label>
+                <label class="option-label"><input type="radio" name="p13" value="Nada valioso"> Nada valioso</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">14. ¿Qué monto anual por estudiante consideraría razonable por el servicio completo (App Móvil + Examen Simulacro + Seminario Vocacional)?</label>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="p14" value="Menos de Bs 20"> Menos de Bs 20</label>
+                <label class="option-label"><input type="radio" name="p14" value="Bs 20 - 35"> Entre Bs 20 y Bs 35</label>
+                <label class="option-label"><input type="radio" name="p14" value="Bs 36 - 50"> Entre Bs 36 y Bs 50</label>
+                <label class="option-label"><input type="radio" name="p14" value="Bs 51 - 80"> Entre Bs 51 y Bs 80</label>
+                <label class="option-label"><input type="radio" name="p14" value="Más de Bs 80"> Más de Bs 80</label>
+                <label class="option-label"><input type="radio" name="p14" value="No pagaría"> No estaría dispuesto/a a pagar</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <label class="q-title">15. Sugerencias o comentarios adicionales:</label>
+            <textarea name="p15" placeholder="Escriba aquí sus observaciones..."></textarea>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-submit" onclick="descargarPDF()">Guardar y Descargar en PDF</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function descargarPDF() {
+        // Elemento a convertir
+        const element = document.getElementById('encuesta-content');
+        
+        // Opciones de configuración para html2pdf
+        const opt = {
+            margin:       [10, 10, 10, 10],
+            filename:     'Encuesta_Padres_Familia.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
+        };
+
+        // Generar el archivo PDF
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
 </body>
 </html>
+
